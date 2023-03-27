@@ -47,7 +47,7 @@ const hargaHotel = {
     { hari: 3, harga: 135000 },
     { hari: 4, harga: 135000 },
     { hari: 5, harga: 120000 },
-    { hari: Infinity, harga: 80000 },
+    { hari: Infinity, harga: 120000 },
   ],
   3: [
     { hari: 1, harga: 200000 },
@@ -55,7 +55,7 @@ const hargaHotel = {
     { hari: 3, harga: 180000 },
     { hari: 4, harga: 180000 },
     { hari: 5, harga: 160000 },
-    { hari: Infinity, harga: 80000 },
+    { hari: Infinity, harga: 160000 },
   ],
 };
 
@@ -72,17 +72,26 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question("Masukkan tipe kamar (Superior/Deluxe/Premium) : ", (tipeKamar) => {
-  rl.question("Masukkan lama menginap (dalam hari) : ", (lamaMenginap) => {
-    const convert = tipeKamarMapping[tipeKamar];
-    const hargaTipeKamar = hargaHotel[tipeKamar];
-    const hargaMalam = hargaTipeKamar.find((data) => lamaMenginap <= data.hari);
-    const totalHarga = hargaMalam.harga * lamaMenginap;
-
-    console.log(`Tipe Kamar: ${convert}`);
-    console.log(`Lama Menginap: ${lamaMenginap} hari`);
-    console.log(`Total Harga: Rp ${totalHarga}`);
-
-    rl.close();
+function akaka() {
+  rl.question("Masukkan tipe kamar (Superior/Deluxe/Premium) : ", (tipeKamar) => {
+    if (tipeKamar > "3") {
+      console.log("masukkan input yang valid")
+      akaka()
+    }
+  
+    rl.question("Masukkan lama menginap (dalam hari) : ", (lamaMenginap) => {
+      const convert = tipeKamarMapping[tipeKamar];
+      const hargaTipeKamar = hargaHotel[tipeKamar];
+      const hargaMalam = hargaTipeKamar.find((data) => lamaMenginap <= data.hari);
+      const totalHarga = hargaMalam.harga * lamaMenginap
+  
+      console.log(`Tipe Kamar: ${convert}`);
+      console.log(`Lama Menginap: ${lamaMenginap} hari`);
+      console.log(`Total Harga: Rp ${totalHarga}`);
+  
+      rl.close();
+    });
   });
-});
+}
+
+akaka()
